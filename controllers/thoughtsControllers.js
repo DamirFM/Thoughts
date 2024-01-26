@@ -48,7 +48,8 @@ module.exports = {
       }
 
       // Create the thought
-      const thought = await Thought.create({ thoughtText, username });
+      const thought = await Thought.create({ thoughtText, username })
+      res.json({ message: 'Thought created!'});
 
       // Update the user's thoughts array
       const updatedUser = await User.findByIdAndUpdate(
@@ -70,7 +71,7 @@ module.exports = {
         { $set: req.body },
         { runValidators: true, new: true }
       )
-      .select('-__v');
+      res.json({ message: 'Thought has been updated!'});
 
       if (!thought) {
         res.status(404).json({ message: 'No thought with this id!' });
@@ -85,7 +86,8 @@ module.exports = {
   // Delete a thought and remove them from the User
   async deleteThought(req, res) {
     try {
-      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
+      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId })
+      res.json({ message: 'Thought has been deleted!'});
 
       if (!thought) {
         return res.status(404).json({ message: 'No such thought exists' });
@@ -121,7 +123,7 @@ module.exports = {
         { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       )
-      .select('-__v');
+      res.json({ message: 'Reaction has been added!'});
 
       if (!thought) {
         return res
@@ -141,7 +143,8 @@ module.exports = {
         { _id: req.params.thoughtId },
         { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
-      );
+      )
+      res.json({ message: 'Reaction has been deleted!'});
 
       if (!thought) {
         return res
