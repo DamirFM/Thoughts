@@ -41,6 +41,9 @@ const userSchema = new Schema(
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
+userSchema.virtual('thoughtsCount').get(function () {
+  return this.thoughts.length;
+});
 // Using mongoose.model() to compile a model based on the schema
 const User = model('user', userSchema);
 

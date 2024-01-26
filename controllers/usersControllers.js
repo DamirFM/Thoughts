@@ -4,7 +4,8 @@ module.exports = {
   // Get all Users
   async getUsers(req, res) {
     try {
-      const users = await User.find();
+      const users = await User.find()
+      .select('-__v');
       res.json(users);
     } catch (err) {
       res.status(500).json(err);
@@ -14,6 +15,7 @@ module.exports = {
   async getSingleUser(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.userId })
+      .select('-__v');
 
 
       if (!user) {
@@ -28,7 +30,8 @@ module.exports = {
   // Create a user
   async createUsers(req, res) {
     try {
-      const user = await User.create(req.body);
+      const user = await User.create(req.body)
+      .select('-__v');
       res.json(user);
     } catch (err) {
       console.log(err);
@@ -57,7 +60,8 @@ module.exports = {
         { _id: req.params.userId },
         { $set: req.body },
         { runValidators: true, new: true }
-      );
+      )
+      .select('-__v');
 
       if (!user) {
         res.status(404).json({ message: 'No user with this id!' });
@@ -71,7 +75,8 @@ module.exports = {
   // Add an Frend to a User
   async addFrend(req, res) {
     try {
-      const user = await User.findById(req.params.id);
+      const user = await User.findById(req.params.id)
+      .select('-__v');
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }

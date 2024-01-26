@@ -5,7 +5,8 @@ module.exports = {
   // Get all Thoughts
   async getThoughts(req, res) {
     try {
-      const thoughts = await Thought.find();
+      const thoughts = await Thought.find()
+        .select('-__v');
 
       const thoughtsObj = {
         thoughts
@@ -26,11 +27,7 @@ module.exports = {
       if (!thought) {
         return res.status(404).json({ message: 'No thought with that ID' })
       }
-
-      res.json({
-        thought,
-        grade: await grade(req.params.thoughtId),
-      });
+      res.json({ thought });
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -39,22 +36,28 @@ module.exports = {
   // create a new thought
   async createThought(req, res) {
     try {
-      // Assuming the user ID is provided in the request body
-      const { userId, thoughtText } = req.body;
-      // Create the thought
-      const thought = await Thought.create({ thoughtText, username: req.body.username });
-      // Update the user's thoughts array
-      const user = await User.findByIdAndUpdate(
-        userId,
-        { $push: { thoughts: thought._id } },
-        { new: true }
-      );
+      // Inside the createThought method
+      const { userId, thoughtText, username } = req.body;
+
+      // Check if the user exists
+      const user = await User.findById(userId)
+      .select('-__v');
 
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      res.json({ thought, user });
+      // Create the thought
+      const thought = await Thought.create({ thoughtText, username });
+
+      // Update the user's thoughts array
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $push: { thoughts: thought._id } },
+        { new: true }
+      );
+
+      res.json({ thought, user: updatedUser });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -66,7 +69,8 @@ module.exports = {
         { _id: req.params.thoughtId },
         { $set: req.body },
         { runValidators: true, new: true }
-      );
+      )
+      .select('-__v');
 
       if (!thought) {
         res.status(404).json({ message: 'No thought with this id!' });
@@ -116,7 +120,8 @@ module.exports = {
         { _id: req.params.thoughtId },
         { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
-      );
+      )
+      .select('-__v');
 
       if (!thought) {
         return res
