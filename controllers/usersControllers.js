@@ -68,4 +68,47 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+    // Add an Frend to a User
+    async addFrend(req, res) {
+      console.log('You are adding an Frend!');
+      console.log(req.body);
+  
+      try {
+        const frend = await User.findOneAndUpdate(
+          { _id: req.params.userId },
+          { $addToSet: { frends: req.body } },
+          { runValidators: true, new: true }
+        );
+  
+        if (!frend) {
+          return res
+            .status(404)
+            .json({ message: 'No frend found with that ID :(' });
+        }
+  
+        res.json(frend);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    },
+  // Remove Frend from a User
+  async removeFrend(req, res) {
+    try {
+      const frend = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { frend: { frendId: req.params.frendId } } },
+        { runValidators: true, new: true }
+      );
+
+      if (!frend) {
+        return res
+          .status(404)
+          .json({ message: 'No frend found with that ID :(' });
+      }
+
+      res.json(frend);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
 };

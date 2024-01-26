@@ -4,6 +4,7 @@ const {
     getThoughts,
     getSingleThought,
     createThought,
+    updateThought,
     deleteThought,
     addReaction,
     removeReaction,
@@ -12,14 +13,14 @@ const {
   // /api/thoughts
   router.route('/').get(getThoughts).post(createThought);
   
-  // /api/thoughts/:studentId
-  router.route('/:studentId').get(getSingleThought).delete(deleteThought);
+  // /api/thoughts/:thoughtId
+  router.route('/:thoughtId').get(getSingleThought).delete(deleteThought);
   
-  // /api/thoughts/:studentId/reactions
-  router.route('/:studentId/reactions').post(addReaction);
+  // /api/thoughts/:thoughtId/reactions
+  router.route('/:thoughtId/reactions').post(addReaction);
   
-  // /api/students/:studentId/reactions/:reactionId
-  router.route('/:studentId/reactions/:reactionId').delete(removeReaction);
+  // /api/thoughts/:thoughtId/reactions/:reactionId
+  router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
   
   module.exports = router;
   

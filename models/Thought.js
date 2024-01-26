@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
+const timeSince = (date) => {
+    // Your implementation here
+    return `${Math.floor((Date.now() - date) / 1000)} seconds ago`;
+  };
+
 // Schema to create User model
 const thoughtSchema = new Schema(
     {
@@ -22,6 +27,7 @@ const thoughtSchema = new Schema(
     },
     {
         toJSON: {
+            virtuals: true,
             getters: true,
         },
     })
