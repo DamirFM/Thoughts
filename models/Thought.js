@@ -1,10 +1,7 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
-const timeSince = (date) => {
-    // Your implementation here
-    return `${Math.floor((Date.now() - date) / 1000)} seconds ago`;
-  };
+const dayjs = require("dayjs");
 
 // Schema to create User model
 const thoughtSchema = new Schema(
@@ -17,7 +14,9 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             timestamps: true,
-            get: (date) => timeSince(date),
+            default: Date.now,
+            get: (createdVal) =>
+            dayjs(createdVal).format("MMM DD, YYYY [at] hh:mm a"),
         },
         username: {
             type: String,
