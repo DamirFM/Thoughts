@@ -46,10 +46,8 @@ module.exports = {
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
-
       // Create the thought
-      const thought = await Thought.create({ thoughtText, username })
-      res.json({ message: 'Thought created!'});
+      const thought = await Thought.create({ thoughtText, username });
 
       // Update the user's thoughts array
       const updatedUser = await User.findByIdAndUpdate(
@@ -58,7 +56,9 @@ module.exports = {
         { new: true }
       );
 
-      res.json({ thought, user: updatedUser });
+      // Send a single response with combined data
+      res.json({ thought, user: updatedUser, message: 'Thought created!' });
+
     } catch (err) {
       res.status(500).json(err);
     }
@@ -71,7 +71,7 @@ module.exports = {
         { $set: req.body },
         { runValidators: true, new: true }
       )
-      res.json({ message: 'Thought has been updated!'});
+
 
       if (!thought) {
         res.status(404).json({ message: 'No thought with this id!' });
@@ -87,7 +87,7 @@ module.exports = {
   async deleteThought(req, res) {
     try {
       const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId })
-      res.json({ message: 'Thought has been deleted!'});
+      
 
       if (!thought) {
         return res.status(404).json({ message: 'No such thought exists' });
@@ -123,7 +123,7 @@ module.exports = {
         { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       )
-      res.json({ message: 'Reaction has been added!'});
+
 
       if (!thought) {
         return res
@@ -144,7 +144,7 @@ module.exports = {
         { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
       )
-      res.json({ message: 'Reaction has been deleted!'});
+
 
       if (!thought) {
         return res

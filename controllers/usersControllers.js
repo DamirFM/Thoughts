@@ -41,7 +41,7 @@ module.exports = {
   async deleteUser(req, res) {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.userId })
-      res.json({ message: 'User has been deleted!'});
+
       if (!user) {
         res.status(404).json({ message: 'No user with that ID' });
       }
@@ -60,7 +60,7 @@ module.exports = {
         { $set: req.body },
         { runValidators: true, new: true }
       )
-      res.json({ message: 'User data has been updated!'});
+
         
 
       if (!user) {
