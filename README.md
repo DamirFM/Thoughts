@@ -46,10 +46,10 @@ Follow these steps to set up the Candy Comment App on your local machine:
 
 ## Usage
 
-API Usage:
+- API Usage:
     Access the API at http://localhost:3001/api.
     Use Insomnia interact with the API endpoints.
-Web Application:
+- Web Application:
     Open your web browser and navigate to http://localhost:3001.
     Explore and use the web interface to interact with thoughts and user accounts.
 
