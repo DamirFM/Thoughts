@@ -5,7 +5,6 @@
 [![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en)
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 
-
 ## Description
 
 Welcome to Thoughts, the backbone of a vibrant and dynamic social network web application. Our API, built on MongoDB and Express, empowers users to seamlessly share thoughts, engage with friends, and cultivate meaningful connections online.
@@ -56,23 +55,23 @@ Web Application:
 
 ## API Endpoints
 
-- Thoughts:
-    GET /api/thoughts: Get all thoughts.
-    GET /api/thoughts/:thoughtId: Get a single thought.
-    POST /api/thoughts: Create a new thought.
-    PUT /api/thoughts/:thoughtId: Update a thought.
-    DELETE /api/thoughts/:thoughtId: Delete a thought and remove it from the user.
-    POST /api/thoughts/:thoughtId/reactions: Add a reaction to a thought.
-    DELETE /api/thoughts/:thoughtId/reactions/:reactionId: Remove a reaction from a thought.
+### Thoughts:
+- GET /api/thoughts: Get all thoughts;
+- GET /api/thoughts/:thoughtId: Get a single thought;
+- POST /api/thoughts: Create a new thought;
+- PUT /api/thoughts/:thoughtId: Update a thought;
+- DELETE /api/thoughts/:thoughtId: Delete a thought and remove it from the user;
+- POST /api/thoughts/:thoughtId/reactions: Add a reaction to a thought;
+- DELETE /api/thoughts/:thoughtId/reactions/:reactionId: Remove a reaction from a thought.
   
-- Users:
-    GET /api/users: Get all users.
-    GET /api/users/:userId: Get a single user.
-    POST /api/users: Create a new user.
-    PUT /api/users/:userId: Update a user.
-    DELETE /api/users/:userId: Delete a user and associated thoughts.
-    POST /api/users/:userId/friends/:friendId: Add a friend to a user.
-    DELETE /api/users/:userId/friends/:friendId: Remove a friend from a user.
+### Users:
+- GET /api/users: Get all users;
+- GET /api/users/:userId: Get a single user;
+- POST /api/users: Create a new user;
+- PUT /api/users/:userId: Update a user;
+- DELETE /api/users/:userId: Delete a user and associated thoughts;
+- POST /api/users/:userId/friends/:friendId: Add a friend to a user;
+- DELETE /api/users/:userId/friends/:friendId: Remove a friend from a user.
 
 ## Contributing
 
