@@ -56,7 +56,7 @@ Web Application:
 
 ## API Endpoints
 
-Thoughts:
+- Thoughts:
     GET /api/thoughts: Get all thoughts.
     GET /api/thoughts/:thoughtId: Get a single thought.
     POST /api/thoughts: Create a new thought.
@@ -64,7 +64,8 @@ Thoughts:
     DELETE /api/thoughts/:thoughtId: Delete a thought and remove it from the user.
     POST /api/thoughts/:thoughtId/reactions: Add a reaction to a thought.
     DELETE /api/thoughts/:thoughtId/reactions/:reactionId: Remove a reaction from a thought.
-Users:
+  
+- Users:
     GET /api/users: Get all users.
     GET /api/users/:userId: Get a single user.
     POST /api/users: Create a new user.
